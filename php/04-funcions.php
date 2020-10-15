@@ -4,6 +4,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Funcións</title>
+	<style>
+		table, th, td {
+			border: 1px solid blue;
+		}
+	</style>
 </head>
 <body>
 	<h1>Funcións en PHP</h1>
@@ -77,7 +82,19 @@
 	echo print_r($campos2);
 	echo "</p>";
 
+	echo "\n<table>";
+	echo "\n\t<tr>";
+	foreach ($campos1 as $value) {
+		echo "\n\t\t<th>$value</th>";
+	}
+	echo "\n\t</tr>";
+	echo "\n\t<tr>";
+	foreach ($campos2 as $value) {
+		echo "\n\t\t<td>$value</td>";
+	}
+	echo "\n\t</tr>";
 
+	echo "\n</table>";
 
 
  ?>	
