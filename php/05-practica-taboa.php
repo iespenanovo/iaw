@@ -18,8 +18,16 @@
 		}
 		table {
 			margin: 0 auto;
-			border: 
+			border: 1px solid #ddd;
+			border-collapse: collapse;
+			text-align: center; 
 		}
+		td {
+			padding: 5px;
+		}
+		.fgris {background-color: #ddd;}
+		.erro {color:red;}	
+
 	</style>
 </head>
 <body>
@@ -41,14 +49,23 @@
 		<?php 
 		if (is_numeric($num)) {
 			echo "\n<h3>Táboa do $num</h3>";
-
+			$clase="";
 			echo "\n<table>";
 			for ($i=0; $i <=10 ; $i++) { 
-				
+				echo "\n\t<tr $clase>";
+				echo "\n\t\t<td>$num</td>";
+				echo "\n\t\t<td>x</td>";
+				echo "\n\t\t<td>$i</td>";
+				echo "\n\t\t<td>=</td>";
+				echo "\n\t\t<td>".$num*$i."</td>";
+				echo "\n\t</tr>";
+				$clase=$clase=="class='fgris'"?"":"class='fgris'";
+
 			}
 
 			echo "\n</table>";
-
+		} elseif($_GET) {//con esto sabemos se foi enviado o formulario
+			echo "\n<h3 class='erro'>Debes indicar un número</h3>";
 
 		}
 

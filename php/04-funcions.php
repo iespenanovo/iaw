@@ -66,7 +66,7 @@
 
 ?>		
 	<h2>función explode() e implode() de php</h2>
-
+	<h3>explode();</h3>
 <?php 
 	$cadea1="nome;apelidos;teléfono;poboación;curso";
 	$cadea2="Pedro;Campos Díaz;666777888;Vilalba;ASIR2";
@@ -95,6 +95,20 @@
 	echo "\n\t</tr>";
 
 	echo "\n</table>";
+
+	echo "<h3>implode();</h3>";
+
+	
+	$cadea1b=implode("*", $campos1);
+	$cadea2b=implode("*", $campos2);
+
+	echo "<p>$cadea1b</p>";
+	echo "<p>$cadea2b</p>";
+
+
+
+
+
 
 
  ?>	
