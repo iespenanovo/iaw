@@ -58,7 +58,7 @@
 
 	if($mes<1 || $mes>12) $mes=$mesActual;
 
-	$nomeMes=strftime("%B",mktime(0,0,0,$mes,1,$ano));
+	$nomeMes=utf8_encode(strftime("%B",mktime(0,0,0,$mes,1,$ano)));
 	//echo "<p>mes a facer: $mes / $ano</p>";
 
 	//echo "<br>diaActual: $diaActual, mesActual: $mesActual, anoActual: $anoActual";
@@ -78,9 +78,21 @@
 	<div id="mes">
 
 		<?php
-			echo "<div><a href='?mes=9&ano=2020'>Ant.</a></div>";
+			$anoMesAnt=$ano;
+			$anoMesSeg=$ano;
+			$mesAnt=$mes-1;
+			$mesSeg=$mes+1;
+			if($mesAnt<1){
+				$mesAnt=12;
+				$anoMesAnt--;
+			}
+			if($mesSeg>12) {
+				$mesSeg=1;
+				$anoMesSeg++;
+			}
+			echo "<div><a href='?mes=$mesAnt&ano=$anoMesAnt'>Ant.</a></div>";
 		 	echo "<div>$nomeMes - $ano</div>";
-			echo "<div><a href='?mes=11&ano=2020'>Seg.</a></div>";
+			echo "<div><a href='?mes=$mesSeg&ano=$anoMesSeg'>Seg.</a></div>";
 		?>
 	</div>
 	<div id="calendario">
