@@ -1,0 +1,22 @@
+* { box-sizing: border-box; }
+
+#contenedor {
+	width: 95%;
+	max-width: 350px;
+	margin: 20px auto;
+	border: 1px solid #ABABAB;
+
+	padding: 20px;
+}
+
+.campos {
+	margin-bottom: 10px;
+}
+
+.etiqueta {
+	display: block;
+}
+
+textarea {
+	width: 100%;
+}

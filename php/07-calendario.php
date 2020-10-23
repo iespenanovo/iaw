@@ -37,6 +37,10 @@
 		.diaActual{
 			color: blue;
 			font-weight: bold;
+			text-decoration: underline;
+		}
+		.finSemana {
+			color: tomato;
 		}
 	</style>
 </head>
@@ -104,12 +108,18 @@
 			<div class="cab">Sáb</div>	
 			<div class="cab">Dom</div>	
 <?php 	
+		$contadorColumnas=0;
 		for ($i=1; $i <$diaSemDia1 ; $i++) { 
+			$contadorColumnas++;
 			echo "\n\t\t\t<div></div>";
 		}
 
 		for ($i=1; $i <= $diasMes[$mes]; $i++) { 
+			$contadorColumnas++;
 			$clase=($i==$diaActual && $mes==$mesActual && $ano==$anoActual)?"diaActual":"";
+			if(($contadorColumnas+1)%7==0 || $contadorColumnas%7==0)
+				$clase.=" finSemana";
+
 			echo "\n\t\t\t<div class='$clase'>$i</div>";
 		}
 
