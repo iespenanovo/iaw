@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Formularios</title>
 	<link rel="stylesheet" href="css/08-formularios.css">
+
 </head>
 <body>
 <?php
@@ -19,7 +20,7 @@
 	//echo "<p>$sexo</p>";
 ?>	
 	<div id="contenedor">
-		<h1>Formularios</h1>
+		<h1>Crear ficheiro datos</h1>
 		<form action="" method="POST">
 			<?php 
 				$faltanCampos=0; $clase="";
@@ -91,6 +92,13 @@
 					echo "<div class='campos fc'>Faltan $faltanCampos campos</div>";
 				} elseif($_POST) {
 					echo "<div class='campos'>Formulario aceptado</div>";
+					$ficheiro=@fopen("datos/datos.csv", "a") or die("<p>Non foi posible abrir o ficheiro datos.csv</p>"); 
+					$depCadea=implode("-", $dep);
+					$soCadea=implode("-", $so);
+					fputs($ficheiro,"$nome;$sexo;$condicions;$depCadea;$provincia;$soCadea;$comentario\n");
+					echo "<p>Os datos foron gardados</p>";
+					echo "<p><a href='09-ficheiros-crear.php'>Novo rexistro</a></p>";
+					fclose($ficheiro);
 				}
 			?>
 
