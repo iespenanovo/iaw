@@ -74,13 +74,13 @@ $so = array(
 								foreach ($dep as $value) {
 									echo "$deportes[$value]<br>";
 								}
-
+ 
 						echo "</td>";
 
 						echo "\n\t\t<td>{$provincias[$campos[4]]}</td>";
 
 						echo "\n\t\t<td>$campos[5]</td>";
-						
+
 						echo "\n\t\t<td>$campos[6]</td>";
 
 
