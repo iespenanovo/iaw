@@ -101,10 +101,30 @@
 					if(!$datosCorrectos) echo "O NIF $nif é incorrecto";
 					echo "</div>";
 
-				} elseif($_POST) {
-					echo "<div class='campos'>Formulario aceptado</div>";
+				} elseif($_POST) { //formulario completo, gardamos en BD
 
-					//pasar a base datos
+					echo "<div class='campos'>Formulario aceptado</div>";
+					$c=@mysqli_connect($servidorBD,$usuarioBD,$claveUBD,$nomeBD,$portoBD) or die("<p>Erro ao conectar co servidor de bases de datos $servidorBD<p>");
+
+					$sql="SET NAMES 'utf8';";
+					@mysqli_query($c,$sql) or die ("<p>Erro ao executar a sentenza sql: <b>$sql</b>
+								   <br> Error número: ".mysqli_errno($c).
+								   "<br> Descrición erro: ".mysqli_error($c).
+								   "</p>");
+
+					$nif=strtoupper($nif);
+					$depCadea=implode("-", $dep);
+					$sql="INSERT INTO alumnos VALUES 
+					(NULL,'$nome','$nif','$sexo','$depCadea','$provincia','$comentario');";
+					@mysqli_query($c,$sql) or die ("<p>Erro ao executar a sentenza sql: <b>$sql</b>
+								   <br> Error número: ".mysqli_errno($c).
+								   "<br> Descrición erro: ".mysqli_error($c).
+								   "</p>");
+
+					echo "<p>Os datos foron gardados na base de datos</p>";
+					echo "<p><a href='14-base-datos-formulario.php'>Novo rexistro</a></p>";
+					mysqli_close($c);
+				
 				}
 			?>
 
