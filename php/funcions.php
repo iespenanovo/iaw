@@ -2,7 +2,10 @@
 
 function nifCorrecto($nif){
 
+	if(strlen($nif)>9) return false;
+
 	$letras="TRWAGMYFPDXBNJZSQVHLCKEO";
+
 	$nif=strtoupper($nif); //pasamos todo a maiusculas 
 
 	$dni=substr($nif,0,-1); //devolve todo menos o último caracter (nº dni)

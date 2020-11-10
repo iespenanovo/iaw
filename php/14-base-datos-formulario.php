@@ -33,7 +33,7 @@
 			 ?>
 			<div class="campos">
 				<label class="etiqueta <?php echo $clase?>" for="nome">Nome: </label>
-				<input id="nome" type="text" name="nome" value="<?php echo $nome ?>">
+				<input maxlength="40" id="nome" type="text" name="nome" value="<?php echo $nome ?>">
 			</div>
 
 
@@ -53,7 +53,7 @@
 			?>
 			<div class="campos">
 				<label class="etiqueta <?php echo $clase?>" for="nif">NIF: </label>
-				<input id="nif" type="text" name="nif" value="<?php echo $nif ?>">
+				<input maxlength="9" id="nif" type="text" name="nif" value="<?php echo $nif ?>">
 			</div>
 
 			<?php $clase=""; if($_POST && $sexo=="") {$faltanCampos++;$clase="fc";} ?>
@@ -112,17 +112,38 @@
 								   "<br> Descrición erro: ".mysqli_error($c).
 								   "</p>");
 
+
 					$nif=strtoupper($nif);
 					$depCadea=implode("-", $dep);
 					$sql="INSERT INTO alumnos VALUES 
 					(NULL,'$nome','$nif','$sexo','$depCadea','$provincia','$comentario');";
-					@mysqli_query($c,$sql) or die ("<p>Erro ao executar a sentenza sql: <b>$sql</b>
+					@mysqli_query($c,$sql);
+					//echo "<hr>".mysqli_errno($c)."<hr>";
+					switch (mysqli_errno($c)) {
+						case 0:
+							echo "<p>Os datos foron gardados na base de datos</p>";
+							echo "<p><a href='14-base-datos-formulario.php'>Novo rexistro</a></p>";
+							break;
+						case 1062:
+							echo "<p>Erro: o NIF $nif xa existe</p>";
+							break;
+/*
+						case 1406:
+							if(strlen($nif)>9)
+								echo "<p>Erro: o NIF non pode superorar 9 caracteres</p>";
+							else
+								echo "<p>Erro: o nome non pode superar os 40 caracteres</p>";
+							break;
+*/
+						
+						default:
+							die ("<p>Erro ao executar a sentenza sql: <b>$sql</b>
 								   <br> Error número: ".mysqli_errno($c).
 								   "<br> Descrición erro: ".mysqli_error($c).
 								   "</p>");
+							break;
+					}
 
-					echo "<p>Os datos foron gardados na base de datos</p>";
-					echo "<p><a href='14-base-datos-formulario.php'>Novo rexistro</a></p>";
 					mysqli_close($c);
 				
 				}
@@ -135,3 +156,4 @@
 	</div>
 </body>
 </html>
+
