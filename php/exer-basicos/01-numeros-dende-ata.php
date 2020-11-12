@@ -72,47 +72,56 @@
 				<label for="nf" class="<?php echo $erro ?>">Número final:</label>
 				<input id="nf" type="number" name="nf" value="<?php echo $nf ?>">
 			</div>
+
+			<?php 
+			if($_GET && ($ni=="" || $nf=="")) { ?>
+				<p class="erro">Faltan campos</p>
+				<?php 
+			} ?>
+
 			<div class="campos">
 				<input type="submit" value="Xerar números">
 			</div>
 		</form>
 
-<!-- mostrar os números con  flexbox, en filas de 10 columnas -->
-		<div id="numeros">
 		<?php 
-			$aspecto="";
-			for ($i = $ni; $i <= $nf; $i++) { 
-				echo "\n<div class='$aspecto' >$i</div>";
-				$aspecto = $aspecto=="invertido"? "" : "invertido";
-			}
-
-		 ?>
-		 </div>
-
-		 <hr>
-<!-- mostrar os números con táboas de 10 columnas -->
-
-		<table>
-			<?php 
-			$ncol=0;$aspecto="";
-
-			for ($i = $ni; $i <= $nf; $i++) { 
-				$ncol++;
-				if($ncol==1) echo "\n<tr>";
-				echo "\n\t<td class='$aspecto'>$i</td>";
-				$aspecto = $aspecto=="invertido"? "" : "invertido";
-				if($ncol==10) {
-					echo "\n</tr>";
-					$ncol=0;
+		if($ni!="" && $nf!="") { //cond1 ?>
+			<!-- mostrar os números con  flexbox, en filas de 10 columnas -->
+			<div id="numeros">
+				<?php 
+				$aspecto="";
+				for ($i = $ni; $i <= $nf; $i++) { 
+					echo "\n<div class='$aspecto' >$i</div>";
+					$aspecto = $aspecto=="invertido"? "" : "invertido";
 				}
-			}
-			if($ncol!=0) echo "\n</tr>"; 
+
+				?>
+			</div>
+
+			<hr>
+			<!-- mostrar os números con táboas de 10 columnas -->
+
+			<table>
+				<?php 
+				$ncol=0;$aspecto="";
+
+				for ($i = $ni; $i <= $nf; $i++) { 
+					$ncol++;
+					if($ncol==1) echo "\n<tr>";
+					echo "\n\t<td class='$aspecto'>$i</td>";
+					$aspecto = $aspecto=="invertido"? "" : "invertido";
+					if($ncol==10) {
+						echo "\n</tr>";
+						$ncol=0;
+					}
+				}
+				if($ncol!=0) echo "\n</tr>"; 
 
 
-			?>
+				?>
+			</table>
 
-
-		</table>
+		<?php } //cond1 ?>
 
 	</div>
 
