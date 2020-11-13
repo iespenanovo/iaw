@@ -35,8 +35,10 @@
 		#resultado {
 			padding: 20px;
 			text-align: center;
-			font-size: 1.2rem;
+			font-size: 1.5rem;
 		}	
+		.azul {color:blue;}
+		.vermello {color: red;}
 	</style>
 </head>
 <body>
@@ -70,34 +72,44 @@
 		</form>
 
 		<?php 
-		if ($_GET && ($n1=="" || $n2==""))  
-			echo "<p class='erro2'>Faltan operandos</p>";
-		else {
-			echo "<div id='resultado'>";
+		if ($_GET) {
+			if ($n1=="" || $n2=="")  
+				echo "<p class='erro2'>Faltan operandos</p>";
+			else {
+				echo "<div id='resultado'>";
 
-			switch ($op) {
-				case '+':
+				switch ($op) {
+					case '+':
 					$resultado=$n1+$n2;
 					break;
-				case '-':
+					case '-':
 					$resultado=$n1-$n2;
 					break;
-				case 'x':
+					case 'x':
 					$resultado=$n1*$n2;
 					break;
-				case '/':
-					$resultado=$n1/$n2;
+					case '/':
+					if ($n2!=0) $resultado=$n1/$n2;
+					else $resultado="erroDiv";
+
 					break;
+				}
+
+				if($resultado==="erroDiv") {
+					echo "<span class='vermello'>Erro, non é posible a división por 0</span>";
+
+				} else {
+					$colorN1 = $n1>=0 ?"azul":"vermello";
+					$colorN2 = $n2>=0 ?"azul":"vermello";
+					$colorRes = $resultado>=0 ?"azul":"vermello";
+
+					echo "<span class='$colorN1'>$n1</span> $op <span class='$colorN2'>$n2</span> = <span class='$colorRes'>$resultado</span>";
+					
+				}
+
+				echo "</div>";
+
 			}
-
-
-			echo "$n1 $op $n2 = $resultado";
-
-
-
-
-			echo "</div>";
-
 		} ?>
 
 
