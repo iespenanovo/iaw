@@ -95,13 +95,14 @@
 				<textarea name="comentario" id="coment" rows="4"><?php echo $comentario ?></textarea>
 			</div>
 			<?php 
-				if($faltanCampos>0 || !$datosCorrectos) {
+			if($_POST) { //formulario enviado
+				if($faltanCampos>0 || !$datosCorrectos) {//ou faltan campos ou o nif e incorrecto
 					echo "<div class='campos fc'>";
 					if($faltanCampos>0) echo "Faltan $faltanCampos campos<br>";
 					if(!$datosCorrectos) echo "O NIF $nif é incorrecto";
 					echo "</div>";
 
-				} elseif($_POST) { //formulario completo, gardamos en BD
+				} else { //formulario completo, gardamos en BD
 
 					echo "<div class='campos'>Formulario aceptado</div>";
 					$c=@mysqli_connect($servidorBD,$usuarioBD,$claveUBD,$nomeBD,$portoBD) or die("<p>Erro ao conectar co servidor de bases de datos $servidorBD<p>");
@@ -114,7 +115,7 @@
 
 
 					$nif=strtoupper($nif);
-					$depCadea=implode("-", $dep);
+					$depCadea=implode("-", $dep);  
 					$sql="INSERT INTO alumnos VALUES 
 					(NULL,'$nome','$nif','$sexo','$depCadea','$provincia','$comentario');";
 					@mysqli_query($c,$sql);
@@ -147,6 +148,7 @@
 					mysqli_close($c);
 				
 				}
+			}
 			?>
 
 			<div class="campos">
