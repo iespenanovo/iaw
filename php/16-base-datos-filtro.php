@@ -10,13 +10,32 @@
 <?php 
 
 $nome=$_GET["nome"] ?? "";
+$csexo=$_GET["sexo"] ?? "";
+//echo "<hr>sexo: $sexo<hr>";
 
 $condicion="";
-if($nome!="") $condicion="WHERE nome='$nome'";
+/*
+if($nome!="") $condicion="WHERE nome LIKE '%$nome%'";
+
+if($csexo!="") {
+	if($condicion=="")
+		$condicion="WHERE sexo='$csexo'";
+	else
+		$condicion.=" and sexo='$csexo'";
+}
+
+*/
+if($nome!="") $condicion=" and nome LIKE '%$nome%'";
+if($csexo!="") $condicion.=" and sexo='$csexo'";
+
+
 
 require 'funcions.php';
 $c=conectarBaseDatos();
-$sql="SELECT * FROM alumnos $condicion ORDER BY provincia;";
+$sql="SELECT * FROM alumnos WHERE true $condicion ORDER BY provincia;";
+
+echo "<hr>$sql<hr>";
+
 $resultado=sql($c,$sql);
 $nFilas=mysqli_num_rows($resultado);
 
@@ -53,6 +72,20 @@ $deportes = array(
 						<input type="text" class="form-control" id="nome" aria-describedby="nomeAxuda" name="nome" value="<?php echo $nome ?>"	>
 						<small id="nomeAxuda" class="form-text text-muted">calquera cadea que forme parte do nome</small>
 					</div>
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="sexo" id="home" value="H" <?php echo $csexo=="H"?"checked":"" ?> >
+							<label class="form-check-label" for="home">Home</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="sexo" id="muller" value="M" <?php echo $csexo=="M"?"checked":"" ?>>
+							<label class="form-check-label" for="muller">Muller</label>
+						</div>						
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="sexo" id="ind" value="" <?php echo $csexo==""?"checked":"" ?>>
+							<label class="form-check-label" for="ind">Indiferente</label>
+						</div>						
+					</div>					
 					<button type="submit" class="btn btn-primary">Filtrar resultados</button>
 				</form>
 
