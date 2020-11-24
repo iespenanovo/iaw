@@ -5,13 +5,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Ler táboa de base de datos filtrando a consulta</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
+	<style>
+		.row {
+			margin-bottom: 12px;
+		}
+	</style>
 </head>
 <?php 
 
 $nome=$_GET["nome"] ?? "";
 $csexo=$_GET["sexo"] ?? "";
-//echo "<hr>sexo: $sexo<hr>";
+$prov=$_GET["prov"] ?? array();
+
 
 $condicion="";
 /*
@@ -25,8 +30,19 @@ if($csexo!="") {
 }
 
 */
-if($nome!="") $condicion=" and nome LIKE '%$nome%'";
-if($csexo!="") $condicion.=" and sexo='$csexo'";
+if($nome!="") $condicion=" AND nome LIKE '%$nome%'";
+if($csexo!="") $condicion.=" AND sexo='$csexo'";
+//if($prov!="") $condicion.=" and provincia='$prov'";
+//
+    //AND (provincia='LU' OR provincia='PO' OR provincia='CO');
+
+if(count($prov)>0) {
+	$condicion.=" AND ( provincia='$prov[0]'";
+	for ($i=1; $i < count($prov) ; $i++) { 
+		$condicion.= " OR provincia='$prov[$i]'";
+	}
+	$condicion.=")";
+}
 
 
 
@@ -85,7 +101,17 @@ $deportes = array(
 							<input class="form-check-input" type="radio" name="sexo" id="ind" value="" <?php echo $csexo==""?"checked":"" ?>>
 							<label class="form-check-label" for="ind">Indiferente</label>
 						</div>						
-					</div>					
+					</div>
+					<div class="form-group">
+						<label for="prov">Provincia</label>
+						<select class="form-control" id="prov" name="prov[]" multiple>
+							<!-- <option value=""></option> -->
+							<option value="CO" <?php echo $prov=='CO'?'selected':'' ?>>A Coruña</option>
+							<option value="LU" <?php echo $prov=='LU'?'selected':'' ?>>Lugo</option>
+							<option value="OU" <?php echo $prov=='OU'?'selected':'' ?>>Ourense</option>
+							<option value="PO" <?php echo $prov=='PO'?'selected':'' ?>>Pontevedra</option>
+						</select>
+					</div>
 					<button type="submit" class="btn btn-primary">Filtrar resultados</button>
 				</form>
 
