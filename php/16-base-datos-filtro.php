@@ -16,6 +16,9 @@
 $nome=$_GET["nome"] ?? "";
 $csexo=$_GET["sexo"] ?? "";
 $prov=$_GET["prov"] ?? array();
+$dep=$_GET["dep"] ?? array();
+$tfd=$_GET["tfd"] ?? "OR";
+
 
 
 $condicion="";
@@ -44,7 +47,21 @@ if(count($prov)>0) {
 	$condicion.=")";
 }
 
+//deportes: 
+//AND deportes LIKE '%ft%'
+//AND deportes LIKE '%ft%' OR  deportes LIKE  '%bl%'
+//AND deportes LIKE '%ft%' OR  deportes LIKE  '%bl%' OR deportes LIKE '%tn%'
 
+
+if(count($dep)>0) {
+	$condicion.=" AND ( deportes LIKE '%$dep[0]%'";
+	for ($i=1; $i < count($dep) ; $i++) { 
+		$condicion.= " $tfd  deportes LIKE  '%$dep[$i]%'";
+	}
+	$condicion.=")";
+}
+
+//$tfd terá valor OR se non se marca ou AND cando se marca
 
 require 'funcions.php';
 $c=conectarBaseDatos();
@@ -106,12 +123,33 @@ $deportes = array(
 						<label for="prov">Provincia</label>
 						<select class="form-control" id="prov" name="prov[]" multiple>
 							<!-- <option value=""></option> -->
-							<option value="CO" <?php echo $prov=='CO'?'selected':'' ?>>A Coruña</option>
-							<option value="LU" <?php echo $prov=='LU'?'selected':'' ?>>Lugo</option>
-							<option value="OU" <?php echo $prov=='OU'?'selected':'' ?>>Ourense</option>
-							<option value="PO" <?php echo $prov=='PO'?'selected':'' ?>>Pontevedra</option>
+							<option value="CO" <?php echo in_array("CO", $prov)?'selected':'' ?>>A Coruña</option>
+							<option value="LU" <?php echo in_array("LU", $prov)?'selected':'' ?>>Lugo</option>
+							<option value="OU" <?php echo in_array("OU", $prov)?'selected':'' ?>>Ourense</option>
+							<option value="PO" <?php echo in_array("PO", $prov)?'selected':'' ?>>Pontevedra</option>
 						</select>
 					</div>
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input"  id="ft" type="checkbox" value="ft" name="dep[]" <?php echo in_array("ft",$dep)?'checked':''?>>
+							<label class="form-check-label" for="ft">Fútbol</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input"  id="bl" type="checkbox" value="bl" name="dep[]" <?php echo in_array("bl",$dep)?'checked':''?>>
+							<label class="form-check-label" for="bl">Baloncesto</label>
+						</div>						
+						<div class="form-check form-check-inline">
+							<input class="form-check-input"  id="tn" type="checkbox" value="tn" name="dep[]" <?php echo in_array("tn",$dep)?'checked':''?>>
+							<label class="form-check-label" for="tn">Ténis</label>
+						</div>						
+					</div>	
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input"  id="tfd" type="checkbox" value="AND" name="tfd" <?php echo $tfd=="AND"?'checked':''?>>
+							<label class="form-check-label" for="tfd">Filtro deportes estricto</label>
+						</div>						
+					</div>	
+									
 					<button type="submit" class="btn btn-primary">Filtrar resultados</button>
 				</form>
 
