@@ -18,6 +18,12 @@ $csexo=$_GET["sexo"] ?? "";
 $prov=$_GET["prov"] ?? array();
 $dep=$_GET["dep"] ?? array();
 $tfd=$_GET["tfd"] ?? "OR";
+$ord1=$_GET["ord1"] ?? "";
+$ord2=$_GET["ord2"] ?? "";
+$ord3=$_GET["ord3"] ?? "";
+$desc1=$_GET["desc1"] ?? "";
+$desc2=$_GET["desc2"] ?? "";
+$desc3=$_GET["desc3"] ?? "";
 
 
 
@@ -48,9 +54,9 @@ if(count($prov)>0) {
 }
 
 //deportes: 
-//AND deportes LIKE '%ft%'
-//AND deportes LIKE '%ft%' OR  deportes LIKE  '%bl%'
-//AND deportes LIKE '%ft%' OR  deportes LIKE  '%bl%' OR deportes LIKE '%tn%'
+//AND (deportes LIKE '%ft%')
+//AND (deportes LIKE '%ft%' OR  deportes LIKE  '%bl%')
+//AND (deportes LIKE '%ft%' OR  deportes LIKE  '%bl%' OR deportes LIKE '%tn%')
 
 
 if(count($dep)>0) {
@@ -63,9 +69,23 @@ if(count($dep)>0) {
 
 //$tfd terá valor OR se non se marca ou AND cando se marca
 
+$ordenacion="";
+if($ord1!="") {
+	$ordenacion=" ORDER BY $ord1 $desc1";
+	if($ord2!="") {
+		$ordenacion.=", $ord2  $desc2";
+		if($ord3!="") {
+			$ordenacion.=", $ord3  $desc3";
+
+		}
+
+	}
+
+}
+
 require 'funcions.php';
 $c=conectarBaseDatos();
-$sql="SELECT * FROM alumnos WHERE true $condicion ORDER BY provincia;";
+$sql="SELECT * FROM alumnos WHERE true $condicion $ordenacion;";
 
 echo "<hr>$sql<hr>";
 
@@ -95,11 +115,12 @@ $deportes = array(
 ?>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="col">
-				<h1>Consulta táboa alumnos</h1>
-				<h4>Filtro:</h4>
-				<form method="GET">
+		<form method="GET">
+			<div class="row">
+				<div class="col">
+					<h1>Consulta táboa alumnos</h1>
+					<h4>Filtro:</h4>
+
 					<div class="form-group">
 						<label for="nome">Nome</label>
 						<input type="text" class="form-control" id="nome" aria-describedby="nomeAxuda" name="nome" value="<?php echo $nome ?>"	>
@@ -149,13 +170,71 @@ $deportes = array(
 							<label class="form-check-label" for="tfd">Filtro deportes estricto</label>
 						</div>						
 					</div>	
-									
+
 					<button type="submit" class="btn btn-primary">Filtrar resultados</button>
-				</form>
 
+
+				</div>
 			</div>
-		</div>
+			<div class="row">
 
+				<div class="col">
+					<div class="form-group">
+						<label for="ord1">Ordenación Nivel 1</label>
+						<select class="form-control" id="ord1" name="ord1">
+							<option value=""></option>
+							<option value="provincia" <?php echo $ord1=="provincia"?"selected":"" ?>>Provincia</option>
+							<option value="sexo"  <?php echo $ord1=="sexo"?"selected":"" ?>>Sexo</option>
+							<option value="nome"  <?php echo $ord1=="nome"?"selected":"" ?>>Nome</option>
+						</select>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="DESC" id="desc1" name="desc1" <?php 	echo $desc1=="DESC"?"checked":"" ?>>
+						<label class="form-check-label" for="desc1">
+							Descendente
+						</label>
+					</div>								
+				</div>
+
+				<div class="col">
+					<div class="form-group">
+						<label for="ord2">Ordenación Nivel 2</label>
+						<select class="form-control" id="ord2" name="ord2">
+							<option value=""></option>
+							<option value="provincia" <?php echo $ord2=="provincia"?"selected":"" ?>>Provincia</option>
+							<option value="sexo"  <?php echo $ord2=="sexo"?"selected":"" ?>>Sexo</option>
+							<option value="nome"  <?php echo $ord2=="nome"?"selected":"" ?>>Nome</option>
+						</select>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="DESC" id="desc2" name="desc2" <?php 	echo $desc2=="DESC"?"checked":"" ?>>
+						<label class="form-check-label" for="desc2">
+							Descendente
+						</label>
+					</div>								
+
+				</div>
+
+				<div class="col">
+					<div class="form-group">
+						<label for="ord3">Ordenación Nivel 3</label>
+						<select class="form-control" id="ord3" name="ord3">
+							<option value=""></option>
+							<option value="provincia" <?php echo $ord3=="provincia"?"selected":"" ?>>Provincia</option>
+							<option value="sexo"  <?php echo $ord3=="sexo"?"selected":"" ?>>Sexo</option>
+							<option value="nome"  <?php echo $ord3=="nome"?"selected":"" ?>>Nome</option>
+						</select>
+					</div>	
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="DESC" id="desc3" name="desc3" <?php 	echo $desc3=="DESC"?"checked":"" ?>>
+						<label class="form-check-label" for="desc3">
+							Descendente
+						</label>
+					</div>								
+
+				</div>
+			</div>
+		</form>
 		<div class="row">
 			<div class="col">
 				<h6>Nº de filas: <?php 	echo $nFilas ?> </h6>	
@@ -200,6 +279,7 @@ $deportes = array(
 				</table>
 			</div>
 		</div>
+
 	</div>
 </body>
 </html>
