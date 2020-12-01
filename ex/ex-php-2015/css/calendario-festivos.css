@@ -1,0 +1,55 @@
+* {
+	box-sizing:border-box; /*ancho de caja de borde hacia dentro*/
+}
+
+#contenedor {
+	width: 735px;
+	margin: 50px auto;
+}
+#mes {
+	text-align: center;
+	font-style: italic;
+}
+.dia {
+	width: 100px;
+	margin: 0 5px 5px 0;
+	padding: 10px 15px;
+	font-size: 1.2em;
+	float: left;
+	border: 1px solid lightgrey;
+	text-align: center;
+}
+
+.cab {
+	background-color: lightgrey;
+	font-weight: bold;
+}
+#mant{
+	float: left;
+	padding-left: 5px;
+}
+#msig{
+	float: right;
+	text-align: right;
+	padding-right: 10px;
+}
+.mantsig {
+	width: 200px;
+	padding-bottom: 5px;
+}
+.mantsig a {
+	text-decoration: none;
+}
+.limpar {
+	clear:both;
+}
+.diaActual {
+	color:lightblue !important;
+	border-radius: 75px 0px;
+	background-color: blue;
+
+}
+.domingo {
+	color: tomato;
+	font-weight: bold;
+}

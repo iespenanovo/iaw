@@ -1,0 +1,73 @@
+
+  * {
+  	boxsizing:border-box;
+  }
+ 	
+  .nombre {text-align: center; border:5px dashed red; width: 900px; margin: auto;padding: 10px; color:blue;}
+
+  body{
+    background: url("../img/pizza.jpg") center center #eee;
+    background-size: cover;
+    
+  } 
+  div#formulario{
+    margin: 50px auto; 
+    width: 600px; 
+    padding: 25px;
+    background: url("../img/pizza2.png") no-repeat 5% 5% #eee;
+
+  } 
+  .detallesp{
+    float: left;
+    width: 33%;
+  }
+
+  legend {
+    font-size: 1.3em; 
+    color: blue;
+    font-style: italic;
+  }
+
+  label {
+    color:red;
+      }
+  label.rotulo {
+    display: block;
+    color:black;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="radio"], input[type="CheckBox"] {
+    margin-bottom: 9px;
+  }
+
+  form h2 {
+    font-size: 2em;
+    text-align: center;
+    color:#900;
+    
+  }
+  .botones{
+    text-align: center;
+
+  }
+
+  div.datose label, div.datosp label {
+    width: 15%;
+    float: left;
+  }
+  div.datose, div.datosp {
+    clear: left;
+    margin-bottom: 9px;
+  }
+
+  .aceptado {
+    text-align: center;
+    color: green;
+  }
+  
+  .noaceptado{
+    text-align: center;
+    color: red;
+  }
