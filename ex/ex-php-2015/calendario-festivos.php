@@ -7,6 +7,34 @@
 </head>
 <body>
 <?php 
+
+//funcion que devuelve un array con los festivos para un mes, del mes y año que se pasa como parámetro
+
+function dias_festivos($ano,$mes) {
+    //conexion servidor base datos
+	require("datos-conexion.php");
+	$baseDatos="iaw2015";
+    /* Establecemos conexión con el servidor de base de datos: */
+	$c=@mysqli_connect($servidor,$usuario,$clave,$baseDatos)
+  	or die ("<p>Error al conectar con el servidor de base de datos $servidor</p>");
+
+    $sql = "Select dias_festivos from festivos where ano_mes='$ano-$mes';";
+
+	$result=@mysqli_query($c, $sql)
+	    or die ("<p>Error al ejecutar la sentencia SQL: $sql</p>
+	        <p>Error número:".mysqli_errno($c)."</p>
+	        <p>".mysqli_error($c)."</p>");
+    
+    for ($i=1;$i<=31;$i++) $df[$i]=0; //en principio ningún festivo
+		
+    while($fila = mysqli_fetch_row($result))
+    {
+        $df[$fila[0]]=1;
+    }
+    mysqli_close($c);
+	return $df; //retorna array con 1 en las posiciones de dias festivos
+}
+
 setlocale(LC_ALL, "spanish"); //galician para galicia e galego
 $diasSem=array("Lu","Ma","Mi","Ju","Vi","Sa","Do");
 //				 0   1    2    3    4    5    6    
@@ -54,6 +82,7 @@ if ($mesSig==13) { // si el mes actual es diciembre
 	$anoSig=$ano+1;// por lo que sumamos una unidad al año
 }
 
+$df=dias_festivos($ano,$mes); //consultamos los festivos del mes que vamos a representar
 
 ?>	
 
@@ -64,7 +93,13 @@ if ($mesSig==13) { // si el mes actual es diciembre
 	<div id="msig" class="mantsig">
 		<a href="<?php echo "calendario-festivos.php?mes=$mesSig&ano=$anoSig" ?>">Mes sig. -&gt;&gt;</a></div>
 	<br class="limpar">
+<!--
+	<div class="dia cab">Lu</div>
+	<div class="dia cab">Ma</div>
+	<div class="dia cab">...</div>
 
+	<div class="dia cab">Do</div>
+-->	
 <?php 
 	/* Este código php genera la estructura comentada anterior*/
 	foreach ($diasSem as $nombreDia) {
@@ -79,10 +114,17 @@ if ($mesSig==13) { // si el mes actual es diciembre
 
 	for ($dia=1; $dia<=$diasMes[$mes]; $dia++) {
 		$clase="";
+/*		$contadorDias++;
+		if($contadorDias==7){
+			$clase="domingo";
+			$contadorDias=0;
+		}*/
 		if (strftime("%w",mktime(0,0,0,$mes,$dia,$ano))==0) //hace el trabajo de $contadorDias
 			$clase="domingo";
 		if($diaActual==$dia and $mesActual==$mes & $anoActual==$ano) 
 		 	$clase.=" diaActual";
+		if ($df[$dia]) 
+			$clase.=" festivo"; 
 		echo "\n\t<div class='dia $clase'>$dia</div>";
 	}
  ?>
