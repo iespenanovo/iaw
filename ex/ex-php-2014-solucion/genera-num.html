@@ -1,0 +1,44 @@
+﻿<html>
+<head>
+	<title>Formulario genera números</title>
+	<style type="text/css" media="screen">
+	.nombre {color:red; text-align: center; border:3px dotted red; width: 50%; margin:auto;}
+	.contenedor {
+		width: 300px;
+		border: 5px dashed blue;
+		margin:100px auto;
+		padding: 30px;
+		text-align: center;
+
+	}
+
+		
+	</style>
+</head>
+<body>
+	<h2 class="nombre">Pon aquí tu nombre y apellidos</h2>
+	<div class="contenedor">
+		<h3>Generador de números</h3>
+		<form action="genera-num.php" method="get" >
+			<p>
+			<label for="desde">Nº desde:</label>
+			<input id="desde" type="text" name="desde" size="5">
+			</p>
+			<p>
+			<label for="hasta">Nº hasta:</label>
+			<input id="hasta" type="text" name="hasta" size="5">
+			</p>
+			<p>
+			<label for="inc">Incremento:</label>
+			<input id="inc" type="text" name="inc" size="5">
+			</p>
+			<p>
+			<input type="submit" name="enviar" value="Generar números">
+			</p>
+
+		</form>
+		
+	</div>
+
+</body>
+</html>
