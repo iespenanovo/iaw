@@ -1,0 +1,29 @@
+
+* {box-sizing: border-box;}
+
+#lista1 {
+	color: blue;
+}
+
+.ordenada {
+	list-style: upper-roman;
+}
+
+.desordenada {
+	list-style: square;
+}
+
+.tabla {
+	width: 50%;
+	border: 1px solid red;
+	text-align: center;
+}
+
+th,td {
+	border: 1px dotted blue;
+	padding: 1rem;
+}
+
+.campo {
+	margin-bottom: 15px;
+}

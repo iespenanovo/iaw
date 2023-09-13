@@ -4,8 +4,136 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link rel="stylesheet" href="css/01-estilo.css">
 </head>
 <body>
-	
+	<h1>listas</h1>
+
+	<ol id="lista1" class="ordenada">
+		<li>elemento</li>
+		<li>elemento</li>
+		<li>elemento</li>
+		<li>elemento</li>
+		<li>elemento</li>
+	</ol>
+
+	<ul id="lista2" class="desordenada">
+		<li>elemento 1</li>
+		<li>elemento 2</li>
+		<li>elemento 3</li>
+		<li>elemento 4</li>
+	</ul>
+
+	<h1>táboas</h1>
+
+	<table class="tabla">
+		<caption>Título táboa</caption>
+
+		<tr>
+			<th>col 1</th>
+			<th>col 2</th>
+			<th>col 3</th>
+			<th>col 4</th>
+			<th>col 5</th>
+		</tr>
+		<!-- (tr>td{Celda $}*5) -->
+		<tr>
+			<td>Celda 1</td>
+			<td>Celda 2</td>
+			<td>Celda 3</td>
+			<td>Celda 4</td>
+			<td>Celda 5</td>
+		</tr>
+		<tr>
+			<td>Celda 1</td>
+			<td>Celda 2</td>
+			<td>Celda 3</td>
+			<td>Celda 4</td>
+			<td>Celda 5</td>
+		</tr>
+		<tr>
+			<td>Celda 1</td>
+			<td>Celda 2</td>
+			<td>Celda 3</td>
+			<td>Celda 4</td>
+			<td>Celda 5</td>
+		</tr>
+		<tr>
+			<td>Celda 1</td>
+			<td>Celda 2</td>
+			<td>Celda 3</td>
+			<td>Celda 4</td>
+			<td>Celda 5</td>
+		</tr>
+		<tr>
+			<td>Celda 1</td>
+			<td>Celda 2</td>
+			<td>Celda 3</td>
+			<td>Celda 4</td>
+			<td>Celda 5</td>
+		</tr>
+
+
+	</table>
+
+	<h1>formularios</h1>
+
+	<form action="02-recibe-formulario.php" method="GET">
+		<div class="campo">
+			<label for="nome">Nome:</label>
+			<input id="nome" type="text" name="nome" >
+		</div>
+
+		<input type="hidden" value="rx44" name="referencia">
+
+		<div class="campo">
+			<label for="provincia">Provincia:</label>
+			<select name="provincia" id="provincia">
+				<option value=""></option>
+				<option value="CO">A Coruña</option>
+				<option value="LU">Lugo</option>
+				<option value="OU">Ourense</option>
+				<option value="PO">Pontevedra</option>
+			</select>
+		</div>
+
+		<div class="campo">
+			<label for="so">Sistemas Operativos:</label>
+			<select name="so[]" id="so" multiple size="4">
+				<option value="W10">Windows 10</option>
+				<option value="W11">Windows 11</option>
+				<option value="LX">Linux</option>
+				<option value="MACOS">MAC OS</option>
+			</select>
+		</div>
+
+		<div class="campo">
+			<p>Sexo:<p>
+			<input type="radio" name="sexo" id="muller" value="F" >
+			<label for="muller"> Muller </label>
+			<input type="radio" name="sexo" id="home" value="M">
+			<label for="home"> Home </label>
+
+		</div>
+
+		<div class="campo">
+			<p>Deportes:</p>
+			<input type="checkbox" name="baloncesto" value="B" id="baloncesto"> 
+			<label for="baloncesto"> Baloncesto </label>
+			<input type="checkbox" name="natacion" value="N" id="natacion"> 
+			<label for="natacion"> Natación </label>
+		</div>
+
+
+
+		<div class="campo">
+			<input type="submit" value="Enviar datos" >
+		</div>
+
+		
+	</form>
+	<div>
+		<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis, eos expedita architecto tenetur, doloremque explicabo nobis asperiores dolorum beatae, alias ea. Quasi, repellat incidunt consequuntur omnis quo consectetur natus, modi.</p>
+	</div>
 </body>
 </html>
