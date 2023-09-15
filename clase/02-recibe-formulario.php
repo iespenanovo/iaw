@@ -13,6 +13,11 @@
 		$provincia=$_GET['provincia']??"";
 		$so=$_GET['so']??array();
 		$sexo=$_GET['sexo']??"";
+		$baloncesto=$_GET['baloncesto']??"";
+		$natacion=$_GET['natacion']??"";
+		$deportes=$_GET['deportes']??array();
+		$comentario=$_GET['comentario']??"";
+
 
 		echo "<p>Nome: $nome</p>";
 		echo "<p>Refencia: $referencia</p>";
@@ -21,6 +26,14 @@
 		var_dump($so);
 		echo "</p>";
 		echo "<p>Sexo: $sexo</p>";
+		echo "<p>DEPORTES checkbox individuais:</p>";
+		echo "<p>Baloncesto: $baloncesto</p>";
+		echo "<p>Natación: $natacion</p>";
+		echo "<p>DEPORTES checkbox grupal:</p>";
+		var_dump($deportes);
+		echo "<p>Comentario: $comentario</p>";
+
+
 
 
 

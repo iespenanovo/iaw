@@ -58,22 +58,7 @@
 			<td>Celda 4</td>
 			<td>Celda 5</td>
 		</tr>
-		<tr>
-			<td>Celda 1</td>
-			<td>Celda 2</td>
-			<td>Celda 3</td>
-			<td>Celda 4</td>
-			<td>Celda 5</td>
-		</tr>
-		<tr>
-			<td>Celda 1</td>
-			<td>Celda 2</td>
-			<td>Celda 3</td>
-			<td>Celda 4</td>
-			<td>Celda 5</td>
-		</tr>
-
-
+	
 	</table>
 
 	<h1>formularios</h1>
@@ -122,6 +107,23 @@
 			<label for="baloncesto"> Baloncesto </label>
 			<input type="checkbox" name="natacion" value="N" id="natacion"> 
 			<label for="natacion"> Natación </label>
+		</div>
+
+		<!-- se o queremos facer como colección de chekbox, poñemos nome de array en name, a todos o mesmo -->
+		<div class="campo">
+			<p>Deportes (como colección):</p>
+			<input type="checkbox" name="deportes[]" value="B" id="baloncesto2"> 
+			<label for="baloncesto2"> Baloncesto </label>
+			<input type="checkbox" name="deportes[]" value="N" id="natacion2"> 
+			<label for="natacion2"> Natación </label>
+			<input type="checkbox" name="deportes[]" value="T" id="tenis2"> 
+			<label for="tenis2"> Tenis </label>
+		</div>
+
+		<div class="campo">
+			<label for="comentario">Comentario:<br></label>
+			<textarea name="comentario" id="comentario" rows="5"></textarea>
+
 		</div>
 
 
