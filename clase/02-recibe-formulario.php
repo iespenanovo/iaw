@@ -8,6 +8,7 @@
 <body>
 	<h1>Datos recibidos:</h1>
 	<?php 
+	
 		$nome=$_GET['nome']??"";
 		$referencia=$_GET['referencia']??"";
 		$provincia=$_GET['provincia']??"";
@@ -34,8 +35,7 @@
 		echo "<p>Comentario: $comentario</p>";
 
 
-
-
+		
 
 
 
