@@ -43,6 +43,8 @@
 	$col4["luns"]=1;
 	$col4["martes"]=2;
 	$col4["mércores"]=3;
+	$col4["xoves"]=4;
+	$col4["venres"]=5;
 
 	echo "\$col4:";
 	echo var_dump($col4);
@@ -80,7 +82,17 @@ foreach ($col1 as $indice => $valor) {
 	echo "<br>Índice:$indice , Valor: $valor";
 }
 
+echo "<hr>";
+echo "<p>Lectura controlada do array \$col4 con foreach, colocado en lista 'ul' html :</p>";
+
+echo "\n<ul>";
+foreach ($col4 as $indice => $valor) {
+	echo "\n\t<li>Índice:$indice , Valor: $valor</li>";
+}
+echo "\n</ul>";
 
 ?>	
+
+
 </body>
 </html>
