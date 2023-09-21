@@ -33,7 +33,54 @@
 		echo "<br>$b es >25";
 	}
 
-
  ?>	
+
+ 	<h3>Alternativa múltiple switch</h3>
+
+<?php 
+	$opcion=3;
+	switch ($opcion) {
+		case 1:
+			echo "<br>Opción uno";
+			break; //necesario break si no queremos que se sigan ejecutando las sentencias del siguiente case, aunque no se cumpla 
+		case 2:
+			echo "<br>Opción dos";
+			break;
+		case 3:
+			echo "<br>Opción tres";
+			break;
+		case 4:
+			echo "<br>Opción cuatro";
+			break;
+		
+		default:
+			echo "<br>Opción por defecto";
+
+			break;
+	}
+
+ ?> 	
+	<h3>Bucle while (repetir mientras se cumple una condición)</h3>
+
+<?php 
+	
+	$numero=1;
+	while ($numero<=3) {
+		echo "bucle while, ejecución bloque número $numero<br>";
+		$numero++;
+	}
+	echo var_dump($numero);
+?>
+	<h1>Bucle for </h1>
+
+<?php 	
+	for ($i=1; $i <=10 ; $i++) { 
+		echo "<br>bucle for, interación $i";
+		
+	}
+
+
+?>	
+
 </body>
 </html>
