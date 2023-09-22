@@ -70,17 +70,46 @@
 		$numero++;
 	}
 	echo var_dump($numero);
+
 ?>
-	<h1>Bucle for </h1>
+	<h3>Bucle for </h3>
 
 <?php 	
 	for ($i=1; $i <=10 ; $i++) { 
 		echo "<br>bucle for, interación $i";
 		
 	}
-
-
 ?>	
+	<h3>Bucle foreach</h3>
+
+<?php 
+	$diasSemana = array("lu","ma","mi","ju","vi","sa","do");
+	//                    0   1    2    3    4    5    6 
+
+	echo "\n<ol>";
+	foreach ($diasSemana as $value) {
+		echo "\n\t<li>$value</li>";
+	}
+	echo "\n</ol>";
+
+	//foreach también nos puede informar del valor del índice de la posición:
+	/*
+	foreach ($variable as $key => $value) {
+		// code...
+	}
+	*/
+
+	//generamos la misma lista ahora con un for:
+
+	echo "\n<ol>";
+	for ($pos=0;$pos<=6;$pos++) {
+		echo "\n\t<li>$diasSemana[$pos]</li>";
+	}
+	echo "\n</ol>";	
+
+	
+
+ ?>	
 
 </body>
 </html>
