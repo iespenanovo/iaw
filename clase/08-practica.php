@@ -40,6 +40,23 @@
 				
 			}
 			echo "</p>";
+
+
+			//generamos la lista con while:
+			echo "\n<hr>";
+			echo "\n<div class='numeros'>";
+			$numero=1;
+			while ($numero <= $hasta) {
+				echo "<span class='$color'>$numero</span>";
+				$color = $color=="azul" ? "rojo" : "azul";
+				$numero++;//equivalente a:	$numero=$numero+1; o:	$numero+=1;
+			}
+
+			echo "\n</div>";
+
+
+
+
 		}
 		
 
