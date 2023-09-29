@@ -1,0 +1,24 @@
+* {box-sizing: border-box;}
+
+.contenedor {
+	width: 80%;
+	margin: auto;
+	border: 1px dotted grey;
+}
+
+h1 {
+	text-align: center;
+}
+
+.calendario {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+}
+
+.calendario div {
+	text-align: center;
+}
+
+.cab {
+	font-weight: bold;
+}
