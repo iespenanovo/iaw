@@ -8,50 +8,49 @@
 </head>
 <body>
 <?php 
-	$diasSem = array('Lu','Ma','Mi','Ju','Vi','Sá','Do');
+	setlocale(LC_ALL , "es");
+	$nombreMesActual=strftime("%B");
+	$anoActual=strftime("%Y");
+	$numeroMesActual=strftime("%m");
+	$momentoDia1MesActual=mktime(0,0,0,$numeroMesActual,1,$anoActual);
+	$diaSemDia1=strftime("%u",$momentoDia1MesActual);
+
+
+	echo var_dump($diaSemDia1);
+
+
+
+	function generarNombreDiasSemana()
+	{
+		$diasSem = array('Lu','Ma','Mi','Ju','Vi','Sá','Do');
+		foreach ($diasSem as $nombreDia) {
+				echo "\n\t\t\t<div class='cab'>$nombreDia</div>";
+			}	
+	}
+
+	function generarSaltosSemana1($numeroSaltos)
+	{
+		for ($i=1; $i <=$numeroSaltos ; $i++) { 
+			echo "\n\t\t\t<div></div>";
+		}
+	}
 
 ?>		
 	<div class="contenedor">
-		<h1>Septiembre - 2023</h1>
+		<h1><?php echo "$nombreMesActual - $anoActual" ?></h1>
+
 
 
 		<div class="calendario">
-			<!-- generar cabecera con nombres dias semana . usamos div con la clase cab -->
-			<div class="dia"></div>
-			<div class="dia"></div>
-			<div class="dia"></div>
-			<div class="dia"></div>
-			<div>1</div>
-			<div>2</div>
-			<div>3</div>
-			<div>4</div>
-			<div>5</div>
-			<div>6</div>
-			<div>7</div>
-			<div>8</div>
-			<div>9</div>
-			<div>10</div>
-			<div>11</div>
-			<div>12</div>
-			<div>13</div>
-			<div>14</div>
-			<div>15</div>
-			<div>16</div>
-			<div>17</div>
-			<div>18</div>
-			<div>19</div>
-			<div>20</div>
-			<div>21</div>
-			<div>22</div>
-			<div>23</div>
-			<div>24</div>
-			<div>25</div>
-			<div>26</div>
-			<div>27</div>
-			<div>28</div>
-			<div>29</div>
-			<div>30</div>
+			<?php
+			//generar cabecera con nombres dias semana . usamos div con la clase cab 
+			generarNombreDiasSemana();
+			generarSaltosSemana1($diaSemDia1-1);
+			?>
 
+		
+			<div class="div">1</div>
+			<div class="div">2</div>
 
 		</div>
 	</div>
