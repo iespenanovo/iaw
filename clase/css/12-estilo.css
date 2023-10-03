@@ -4,6 +4,7 @@
 	width: 80%;
 	margin: auto;
 	border: 1px dotted grey;
+	padding: 1rem;
 }
 
 h1 {
@@ -13,6 +14,7 @@ h1 {
 .calendario {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
+	grid-gap: 2px;
 }
 
 .calendario div {
@@ -21,4 +23,17 @@ h1 {
 
 .cab {
 	font-weight: bold;
+	border-bottom: 1px solid grey;
+}
+
+.dia {
+	border: 1px solid grey;
+}
+
+.diaActual {
+	background-color: lightblue;
+	font-weight: bold;
+}
+.festivo {
+	color:red;
 }
