@@ -9,6 +9,8 @@
 <body>
 <?php 
 	setlocale(LC_ALL , "es");
+
+
 	$nombreMesActual=strftime("%B");
 	$anoActual=strftime("%Y");
 	$numeroMesActual=(int) strftime("%m");//el 'cast' (int) fuerza a tipo entero, para evitar 01, 02 ... 09 en meses inferiores a octubre
@@ -46,6 +48,16 @@
 		}
 	}
 
+	// function generarSaltosSemana1($numeroSaltos,&$nCol)
+	// //genera las columnas vacías necesarias para llegar al día 1 del mes
+	// {
+	// 	for ($i=1; $i <=$numeroSaltos ; $i++) { 
+	// 		$nCol++;
+	// 		echo "\n\t\t\t<div></div>";
+	// 	}
+	// }
+
+
 ?>		
 	<div class="contenedor">
 		<h1><?php echo "$nombreMesActual - $anoActual" ?></h1>
@@ -56,15 +68,27 @@
 			<?php
 			//generar cabecera con nombres dias semana . usamos div con la clase cab 
 			generarNombreDiasSemana();
+			$nItem=$diaSemDia1-1;//queremos controlar en qué columna vamos a generar código html
 			generarSaltosSemana1($diaSemDia1-1);
+//			$nItem=0;//queremos controlar en qué columna vamos a generar código html
+//			generarSaltosSemana1($diaSemDia1-1,$nItem);
 
 			for ($dia=1; $dia <=$numDiasMes[$numeroMesActual] ; $dia++) { 
 				$clases = $dia==$diaActual ? "diaActual" : "";
-				
 				//la línea anterior equivale a las dos siguientes comentadas:
 				//$clases="";
 				//if($dia==$diaActual) {$clases="diaActual";}
-				echo "\n\t\t\t<div class='dia $clases ' >$dia</div>";
+
+				$nItem++;
+				if($nItem==7){
+					$clases.=" festivo";
+				 	$nItem=0;
+				}
+
+				//$clases.=($nItem % 7)==0 ?" festivo":"";
+
+
+				echo "\n\t\t\t<div class='dia $clases'>$dia</div>";
 			}
 
 			?>
