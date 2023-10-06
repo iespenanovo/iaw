@@ -70,7 +70,19 @@
 
 ?>		
 	<div class="contenedor">
-		<h1><?php echo "$nombreMes - $ano" ?></h1>
+		<h1>
+			<?php 
+			$mesAnt=$mes-1;
+			$anoMesAnt=$ano;
+			$mesSte=$mes+1;
+			$anoMesSte=$ano;
+			echo "<a href='?mes=$mesAnt&ano=$anoMesAnt'>&lt;&lt;--</a>";
+			echo "<span>$nombreMes - $ano</span>"; 
+			echo "<a href='?mes=$mesSte&ano=$anoMesSte'>--&gt;&gt;</a>";
+
+
+			?>
+		</h1>
 
 
 
