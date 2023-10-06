@@ -14,30 +14,32 @@
 	setlocale(LC_ALL , "es");
 
 
-	$nombreMesActual=strftime("%B");
 	$anoActual=strftime("%Y");
 	$numeroMesActual=(int) strftime("%m");//el 'cast' (int) fuerza a tipo entero, para evitar 01, 02 ... 09 en meses inferiores a octubre
-
-	$mes=$_GET['mes']??:$numeroMesActual;
-	$ano=$_GET['ano']??:$anoActual;
-
-
-	$momentoDia1MesActual=mktime(0,0,0,$numeroMesActual,1,$anoActual);
-	$diaSemDia1=strftime("%u",$momentoDia1MesActual);
 	$diaActual=(int)strftime("%d");
+
+
+	$mes=$_GET['mes']??$numeroMesActual;
+	$ano=$_GET['ano']??$anoActual;
+
+
+	$momentoDia1Mes=mktime(0,0,0,$mes,1,$ano);
+	$diaSemDia1=strftime("%u",$momentoDia1Mes);
+	$nombreMes=strftime("%B",$momentoDia1Mes);
+	
 
 	//echo var_dump($diaSemDia1);
 
 	$numDiasMes=array("",31,28,31,30,31,30,31,31,30,31,30,31);
 	//                0   1  2  3  4  5  6  7  8  9 10 11 12
 
-	if (checkdate(2, 29, $anoActual)) {
+	if (checkdate(2, 29, $ano)) {
 		//si se cumple, quiere decir que el año es bisiesto
 		$numDiasMes[2]=29;
 	}
 
 	//echo var_dump($numDiasMes);
-	//echo "$nombreMesActual tiene $numDiasMes[$numeroMesActual]";
+	//echo "$nombreMes tiene $numDiasMes[$numeroMesActual]";
 
 
 	function generarNombreDiasSemana()
@@ -68,7 +70,7 @@
 
 ?>		
 	<div class="contenedor">
-		<h1><?php echo "$nombreMesActual - $anoActual" ?></h1>
+		<h1><?php echo "$nombreMes - $ano" ?></h1>
 
 
 
@@ -81,8 +83,8 @@
 //			$nItem=0;//queremos controlar en qué columna vamos a generar código html
 //			generarSaltosSemana1($diaSemDia1-1,$nItem);
 
-			for ($dia=1; $dia <=$numDiasMes[$numeroMesActual] ; $dia++) { 
-				$clases = $dia==$diaActual ? "diaActual" : "";
+			for ($dia=1; $dia <=$numDiasMes[$mes] ; $dia++) { 
+				$clases = ($dia==$diaActual and $mes==$numeroMesActual and $ano==$anoActual) ? "diaActual" : "";
 				//la línea anterior equivale a las dos siguientes comentadas:
 				//$clases="";
 				//if($dia==$diaActual) {$clases="diaActual";}
