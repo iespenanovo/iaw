@@ -37,3 +37,13 @@ h1 {
 .festivo {
 	color:red;
 }
+
+.cabecera {
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
+	text-align: center;
+
+}
+.cabecera a {
+	text-decoration: none;
+}

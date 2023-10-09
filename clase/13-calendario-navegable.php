@@ -70,15 +70,24 @@
 
 ?>		
 	<div class="contenedor">
-		<h1>
+		<h1 class="cabecera">
 			<?php 
 			$mesAnt=$mes-1;
 			$anoMesAnt=$ano;
 			$mesSte=$mes+1;
 			$anoMesSte=$ano;
-			echo "<a href='?mes=$mesAnt&ano=$anoMesAnt'>&lt;&lt;--</a>";
+			if($mesAnt<1) {
+				$mesAnt=12;
+				$anoMesAnt--;
+			}
+			if($mesSte>12){
+				$mesSte=1;
+				$anoMesSte++;
+			}
+
+			echo "<a href='?mes=$mesAnt&ano=$anoMesAnt'>&lt;&lt;</a>";
 			echo "<span>$nombreMes - $ano</span>"; 
-			echo "<a href='?mes=$mesSte&ano=$anoMesSte'>--&gt;&gt;</a>";
+			echo "<a href='?mes=$mesSte&ano=$anoMesSte'>&gt;&gt;</a>";
 
 
 			?>
