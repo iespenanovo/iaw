@@ -19,6 +19,11 @@
 	require 'datos-conexion-BD.php';
 	$c=@mysqli_connect($BD_servidor,$DB_usuario,$BD_clave,$DB_baseDatos,$DB_puerto) or die("<p>Error conectando con el servidor de bases de datos $BD_servidor</p>");
 
+	$DB_baseDatos="iaw-23-24";
+	$sql="CREATE DATABASE IF NOT EXISTS `$BD_baseDatos` COLLATE 'utf8_general_ci'";
+
+
+
 ?>	
 </body>
 </html>
