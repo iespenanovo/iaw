@@ -60,14 +60,56 @@
 
 	echo "<p>Se creó la tabla alumnos</p>";
 
+	$SQL="TRUNCATE alumnos";//elemina el contenido de la tabla
+	echo "<p>$SQL</p>";
+	consultaSQL($c,$SQL);
+
 	$cadenaHash=hash('md5', 'abc123.');
-	$sql="INSERT INTO `alumnos` (`nombre`, `nif`, `clave`, `sexo`, `deportes`, `provincia`, `so`, `comentario`) VALUES
+	$SQL="INSERT INTO `alumnos` (`nombre`, `nif`, `clave`, `sexo`, `deportes`, `provincia`, `so`, `comentario`) VALUES
 	('Ana Díaz','12345678Z','$cadenaHash','M','N*B','LU','w10*LX','Preferencia nocturno'),
 	('Luis Fernández','12345677J','".hash('md5','abc123.')."','H','F*B','CO','w10*LX','Preferencia diúrno'),
 	('Gonzalo Abuín','12345676N','".hash('md5','abc123.')."','H','F*N','PO','w8*MOS',''),
 	('Julia Moteagudo','12345675B','".hash('md5','abc123.')."','M','F*N*B','CO','w8*LX','Becario'),
 	('César Ríos','12345674X','".hash('md5','abc123.')."','H','F*N','LU','w10','Preferencia nocturno')
 	";
+
+	echo "<p>$SQL</p>";
+	consultaSQL($c,$SQL);
+
+	$numFilas=mysqli_affected_rows($c);
+
+	echo "<p>Se insertaron $numFilas registros en la tabla alumnos</p>";
+
+	$SQL="SELECT * FROM alumnos ORDER BY provincia,nombre";
+	echo "<p>$SQL</p>";
+	$resultado=consultaSQL($c,$SQL);
+	$numFilas=mysqli_num_rows($resultado);
+	echo "<p>La sentencia devuelve $numFilas filas</p>";
+
+	//var_dump($resultado);
+
+	//$fila=mysqli_fetch_row($resultado);//devuelve la ste fila en un array con índices numéricos (0, 1 ...), devuelve false si no quedan filas
+
+	while ($fila=mysqli_fetch_row($resultado)) {
+		//echo "<br>$fila[0] - $fila[1] - ... ";
+		list($id,$nombre,$nif,$clave,$sexo,$deportes,$provincia,$so,$comentario)=$fila;
+		echo "<br> $id - $nombre - $nif - $clave - $sexo - $deportes - $provincia - $so - $comentario";
+	}
+
+	$SQL="SELECT * FROM alumnos WHERE provincia='LU' or provincia='CO' ORDER BY provincia DESC, nombre ASC";
+	echo "<p>$SQL</p>";
+	$resultado=consultaSQL($c,$SQL);
+	$numFilas=mysqli_num_rows($resultado);
+	echo "<p>La sentencia devuelve $numFilas filas</p>";
+
+	//var_dump($resultado);
+
+	//$fila=mysqli_fetch_array($resultado);//devuelve la ste fila en un array asociativo, con índices de nombres de campo  ('id', 'nombre' ...), devuelve false si no quedan filas
+
+	while ($fila=mysqli_fetch_array($resultado)) {
+		echo "<br> {$fila['id']} - {$fila['nombre']} - {$fila['nif']} - {$fila['clave']} - {$fila['sexo']} - {$fila['deportes']} - {$fila['provincia']} - {$fila['so']} - {$fila['comentario']}";
+	}
+
 
 
 ?>	
