@@ -110,8 +110,19 @@
 		echo "<br> {$fila['id']} - {$fila['nombre']} - {$fila['nif']} - {$fila['clave']} - {$fila['sexo']} - {$fila['deportes']} - {$fila['provincia']} - {$fila['so']} - {$fila['comentario']}";
 	}
 
+	$SQL="DELETE FROM alumnos WHERE provincia='CO'";
+	echo "<p>$SQL</p>";
+	consultaSQL($c,$SQL);
+	$numFilas=mysqli_affected_rows($c);
+	echo "<p>Se borraron $numFilas registros en la tabla alumnos</p>";
 
+	$SQL="UPDATE alumnos SET so='W10*MOS' WHERE provincia='LU'";
+	echo "<p>$SQL</p>";
+	consultaSQL($c,$SQL);
+	$numFilas=mysqli_affected_rows($c);
+	echo "<p>Se actualizaron $numFilas registros en la tabla alumnos</p>";
 
+	mysqli_close($c);//cierra la conexión con el servidor de BD. Si no lo hacemos , se libera igualmente al finalizar el script
 ?>	
 </body>
 </html>

@@ -1,0 +1,34 @@
+* {	box-sizing: border-box;}
+
+h1, h3 {text-align: center;}
+
+.contenedor {
+	width: 90%;
+	margin: auto;
+	border: 1px solid grey;
+	padding: 20px;
+
+}
+
+.campo {
+	margin-bottom: 10px;
+}
+
+.rojo,.error {
+	color: red;
+}
+
+.aceptado {
+	color:  green;
+	font-size: 1.5rem;
+	
+
+}
+
+.nifOk {
+	color: green;
+}
+
+.nifError {
+	color: orange;
+}
