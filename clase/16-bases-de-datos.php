@@ -21,7 +21,7 @@
 	//                   servidor  user   passw  baseDatos, puerto(por defecto el 3306) 
 
 	//es más práctico tener los datos de conexión en un único archivo
-	require 'datos-conexion-BD.php';
+	require '16-datos-conexion-BD.php';
 	$c=@mysqli_connect($BD_servidor,$BD_usuario,$BD_clave,$BD_baseDatos,$BD_puerto) or die("<p>Error conectando con el servidor de bases de datos $BD_servidor</p>");
 
 	$BD_baseDatos="iaw-23-24";

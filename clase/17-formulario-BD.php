@@ -1,4 +1,4 @@
-
+<?php require 'base-datos.php' ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
