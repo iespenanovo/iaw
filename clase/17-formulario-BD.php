@@ -1,4 +1,14 @@
-<?php require 'base-datos.php' ?>
+<?php 
+require 'base-datos.php';
+
+$nombre=$_POST['nombre']??"";
+$nif=$_POST['nif']??"";
+$clave=$_POST['clave']??"";
+$sexo=$_POST['sexo']??"";
+
+$mensajesError="";
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,26 +24,55 @@
 
 		<form action="" method="POST">
 			<div class="campo">
-				<label for="nombre" class="">Nombre</label>
-				<input id="nombre" type="text" name="nombre" value="">
+				<?php 
+				    $clases="";
+					if ($nombre=="" and $_POST) {//nombre vacío Y formulario enviado
+							$clases='error';
+							$mensajesError.="<p class='error'>El campo nombre es obligatorio</p>";
+						}	
+				?>
+				<label for="nombre" class="<?php echo $clases ?>">Nombre</label>
+				<input id="nombre" type="text" name="nombre" value="<?php echo $nombre ?>" >
 			</div>
 
 			<div class="campo">
-				<label for="nif" class="">NIF</label>
-				<input id="nif" type="text" name="nif" value="">
+				<?php 
+				    $clases="";
+					if ($nif=="" and $_POST) {//nif vacío Y formulario enviado
+							$clases='error';
+							$mensajesError.="<p class='error'>El campo NIF es obligatorio</p>";
+						}	
+				?>				
+				<label for="nif" class="<?php echo $clases ?>">NIF</label>
+				<input id="nif" type="text" name="nif" value="<?php echo $nif ?>">
 			</div>
 
 			<div class="campo">
-				<label for='clave' class=''>Contraseña:</label>
+				<?php 
+				    $clases="";
+					if ($clave=="" and $_POST) {//clave vacío Y formulario enviado
+							$clases='error';
+							$mensajesError.="<p class='error'>El campo contraseña es obligatorio</p>";
+						}	
+				?>	
+				<label for='clave' class='<?php echo $clases ?>'>Contraseña:</label>
 				<input id='clave' type='password' name='clave' value=''>				
 			</div>
 
 			<div class="campo">
-				<label class="">Sexo:<br></label>
+				<?php 
+				    $clases="";
+					if ($sexo=="" and $_POST) {//sexo vacío Y formulario enviado
+							$clases='error';
+							$mensajesError.="<p class='error'>El campo sexo es obligatorio</p>";
+						}	
+				?>	
+
+				<label class="<?php echo $clases ?>">Sexo:<br></label>
 				<label for="hombre">Hombre </label>
-				<input id="hombre" type="radio" name="sexo" value="H"  >
+				<input id="hombre" type="radio" name="sexo" value="H" <?php echo $sexo=='H'?'checked':'' ?>   >
 				<label for="mujer"> Mujer </label>
-				<input id="mujer" type="radio" name="sexo" value="M" >
+				<input id="mujer" type="radio" name="sexo" value="M" <?php echo $sexo=='M'?'checked':'' ?>  >
 			</div>
 
 			<div class="campo">
@@ -82,7 +121,9 @@
 				<input type="submit" value="Enviar formulario">
 			</div>
 
-			
+			<?php 
+				echo $mensajesError;
+			?>
 
 		</form>
 
