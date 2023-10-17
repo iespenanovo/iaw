@@ -5,6 +5,11 @@ $nombre=$_POST['nombre']??"";
 $nif=$_POST['nif']??"";
 $clave=$_POST['clave']??"";
 $sexo=$_POST['sexo']??"";
+$deportes=$_POST['deportes']??array();//si no tenemos parámetro 'deportes[]' crea un array vacío
+$provincia=$_POST['provincia']??"";
+$so=$_POST['so']??array();//si no tenemos parámetro 'so[]' crea un array vacío
+$comentario=$_POST['comentario']??"";
+
 
 $mensajesError="";
 
@@ -56,7 +61,7 @@ $mensajesError="";
 						}	
 				?>	
 				<label for='clave' class='<?php echo $clases ?>'>Contraseña:</label>
-				<input id='clave' type='password' name='clave' value=''>				
+				<input id='clave' type='password' name='clave' value='<?php echo $clave ?>'>				
 			</div>
 
 			<div class="campo">
@@ -76,45 +81,67 @@ $mensajesError="";
 			</div>
 
 			<div class="campo">
+				<?php 
+				    $clases="";
+					if (count($deportes)<2 and $_POST) {//menos de 2 deportes Y formulario enviado
+							$clases='error';
+							$mensajesError.="<p class='error'>Es obligatorio marcar al menos 2 deportes</p>";
+						}	
+				?>	
 
-				<label class="">Deportes:<br></label>
+				<label class="<?php echo $clases ?>">Deportes:<br></label>
 				<label for="futbol">Futbol </label>
-				<input id="futbol" type="checkbox" name="deportes[]" value="F" >
+				<input id="futbol" type="checkbox" name="deportes[]" value="F" <?php echo in_array("F", $deportes)?'checked':'' ?>>
 				<label for="baloncesto"> Baloncesto </label>
-				<input id="baloncesto" type="checkbox" name="deportes[]" value="B" >
+				<input id="baloncesto" type="checkbox" name="deportes[]" value="B" <?php echo in_array("B", $deportes)?'checked':'' ?>>
 				<label for="natacion"> Natación </label>
-				<input id="natacion" type="checkbox" name="deportes[]" value="N" >
+				<input id="natacion" type="checkbox" name="deportes[]" value="N" <?php echo in_array("N", $deportes)?'checked':'' ?>>
 			</div>
 
 
 			<div class="campo">
+				<?php 
+				    $clases="";
+					if ($provincia=="" and $_POST) {//provincia vacío Y formulario enviado
+							$clases='error';
+							$mensajesError.="<p class='error'>El campo provincia es obligatorio</p>";
+						}	
+				?>	
 
-				<label for="provincia" class="">Provincia:</label>
+				<label for="provincia" class="<?php echo $clases ?>">Provincia:</label>
 				<select name="provincia" id="provincia">
 					<option value=""></option>
-					<option value="CO" >A Coruña</option>
-					<option value="LU" >Lugo</option>
-					<option value="OU" >Ourense</option>
-					<option value="PO" >Pontevedra</option>
+					<option value="CO" <?php echo $provincia=="CO"?"selected":"" ?>>A Coruña</option>
+					<option value="LU" <?php echo $provincia=="LU"?"selected":"" ?>>Lugo</option>
+					<option value="OU" <?php echo $provincia=="OU"?"selected":"" ?>>Ourense</option>
+					<option value="PO" <?php echo $provincia=="PO"?"selected":"" ?>>Pontevedra</option>
 				</select>
 			</div>
 
 			<div class="campo">
+				<?php 
+				    $clases="";
+					if (count($so)<1 and $_POST) {//menos de 1 so Y formulario enviado
+							$clases='error';
+							$mensajesError.="<p class='error'>Es obligatorio marcar al menos un sistema operativo</p>";
+						}	
+				?>	
 
-				<label for="so" class="">Sistemas Operativos:<br></label>
+
+				<label for="so" class="<?php echo $clases ?>">Sistemas Operativos:<br></label>
 				<select name="so[]" id="so" multiple size="5">
-					<option value="W8" >Windows 8</option>
-					<option value="W10" >Windows 10</option>
-					<option value="W11" >Windows 11</option>
-					<option value="LX" >Linux</option>
-					<option value="MOS" >macOS</option>
+					<option value="W8" <?php echo in_array("W8", $so)?'selected':'' ?>>Windows 8</option>
+					<option value="W10" <?php echo in_array("W10", $so)?'selected':'' ?>>Windows 10</option>
+					<option value="W11" <?php echo in_array("W11", $so)?'selected':'' ?>>Windows 11</option>
+					<option value="LX" <?php echo in_array("LX", $so)?'selected':'' ?>>Linux</option>
+					<option value="MOS" <?php echo in_array("MOS", $so)?'selected':'' ?>>macOS</option>
 				</select>
 			</div>
 
 
 			<div class="campo">
 				<label for="comentario">Comentario:<br></label>
-				<textarea name="comentario" id="comentario" cols="30" rows="5"></textarea>
+				<textarea name="comentario" id="comentario" cols="30" rows="5"><?php echo $comentario ?></textarea>
 			</div>
 
 			<div class="campo">
@@ -123,6 +150,13 @@ $mensajesError="";
 
 			<?php 
 				echo $mensajesError;
+
+				if($mensajesError=="" and $_POST) {
+					//formulario validado sin errores
+					//podemos guardar en tabla alumnos 
+					//de la base de datos
+					
+				}
 			?>
 
 		</form>
