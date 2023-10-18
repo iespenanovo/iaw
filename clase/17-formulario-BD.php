@@ -1,8 +1,10 @@
 <?php 
 require 'base-datos.php';
+require 'funciones.php';
 
 $nombre=$_POST['nombre']??"";
 $nif=$_POST['nif']??"";
+$nif=strtoupper($nif);//lo pasamos a mayúsculas
 $clave=$_POST['clave']??"";
 $sexo=$_POST['sexo']??"";
 $deportes=$_POST['deportes']??array();//si no tenemos parámetro 'deportes[]' crea un array vacío
@@ -46,7 +48,10 @@ $mensajesError="";
 					if ($nif=="" and $_POST) {//nif vacío Y formulario enviado
 							$clases='error';
 							$mensajesError.="<p class='error'>El campo NIF es obligatorio</p>";
-						}	
+						} elseif(!validarNIF($nif) and $_POST)	{
+							$clases='error';
+							$mensajesError.="<p class='error'>El NIF no es válido</p>";
+						}
 				?>				
 				<label for="nif" class="<?php echo $clases ?>">NIF</label>
 				<input id="nif" type="text" name="nif" value="<?php echo $nif ?>">
@@ -155,8 +160,38 @@ $mensajesError="";
 					//formulario validado sin errores
 					//podemos guardar en tabla alumnos 
 					//de la base de datos
-					
+
+					$clave=hash('md5', $clave);
+					$cadenaDeportes=implode("*", $deportes);
+					$cadenaSO=implode("*",$so);
+					$SQL="
+					INSERT INTO 
+					`alumnos` (`nombre`, `nif`, `clave`, `sexo`, `deportes`, `provincia`, `so`, `comentario`) 
+					VALUES
+					('$nombre','$nif','$clave','$sexo','$cadenaDeportes','$provincia','$cadenaSO','$comentario')";
+					@mysqli_query($c,$SQL);
+
+					switch (mysqli_errno($c)) {
+						case 0: $mensaje="<p class='aceptado'>Formulario aceptado y registro almacenado en base de datos</p><p><a href='?'>[Nuevo registro]</a></p>";
+							// code...
+							break;
+						case 1062://error de clave duplicada
+								$mensaje="<p class='error'>El NIF <strong>$nif</strong> ya existe en la base de datos</p>";
+							break;	
+						
+						default:
+								$mensaje="
+								<p class='error'>Error en sentencia SQL : <strong>$SQL</strong></p>
+								<p class='error'>Error nº: <strong>".mysqli_errno($idCon)."</strong></p>
+								<p class='error'>Descripción: <strong>".mysqli_error($idCon)."</strong></p>";
+						break;
+					}
+
+					echo $mensaje;
 				}
+
+
+				mysqli_close($c);//cerramos conexión con servidor BD
 			?>
 
 		</form>
