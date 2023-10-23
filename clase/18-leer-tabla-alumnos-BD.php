@@ -9,21 +9,45 @@
 </head>
 <body>
 
-<?php 
+	<?php 
 	require "base-datos.php";
-	$SQL="SELECT * FROM alumnos ORDER BY provincia,nombre";
+
+	$provincia=$_GET["provincia"]??"";
+
+
+	$SQL="SELECT * FROM alumnos WHERE provincia='$provincia' ORDER BY provincia,nombre";
 	//echo "<p>$SQL</p>";
 	$resultado=consultaSQL($c,$SQL);
 	$numFilas=mysqli_num_rows($resultado);
 
-	$Ddeportes = array('F' => "Fútbol" , 'B' => "Baloncesto" , 'N' => "Natación");
-?>
+	$dDeportes = array('F' => 'Fútbol' , 'B' => 'Baloncesto' , 'N' => 'Natación');
+	$dSO = array('W8' => 'Windows 8' , 'W10' => 'Windows 10' , 'W11' => 'Windows 11' , 'LX' => 'Linux' , 'MOS' => 'macOS');
+
+
+	?>
 
 	<div class="container">
 		<div class="row">
 			<h1>Listado de alumnos de la BD</h1>
 		</div>
+		<div class="row">
+			<div class="col">
+				<form method="GET">
+					<label for="provincia">Provincia:</label>
+					<select name="provincia" id="provincia">
+						<option value=""></option>
+						<option value="CO" <?php echo $provincia=="CO"?"selected":"" ?>>A Coruña</option>
+						<option value="LU" <?php echo $provincia=="LU"?"selected":"" ?>>Lugo</option>
+						<option value="OU" <?php echo $provincia=="OU"?"selected":"" ?>>Ourense</option>
+						<option value="PO" <?php echo $provincia=="PO"?"selected":"" ?>>Pontevedra</option>
+					</select>
 
+					<input type="submit" value="Filtrar">
+
+					
+				</form>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col">
 				<table class="table table-responsive table-striped">
@@ -40,31 +64,38 @@
 						<th>Sist.Op.</th>
 						<th>Comentario</th>
 					</tr>
-<?php 
-while ($alumno=mysqli_fetch_row($resultado)) {
-		list($id,$nombre,$nif,$clave,$sexo,$deportes,$provincia,$so,$comentario)=$alumno;
+					<?php 
+					while ($alumno=mysqli_fetch_row($resultado)) {
+						list($id,$nombre,$nif,$clave,$sexo,$deportes,$provincia,$so,$comentario)=$alumno;
 
-		echo "<tr>";
-			echo "<td>$id</td>";  
-			echo "<td>$nombre</td>";
-			echo "<td>$nif</td>";
-			$Dsexo=$sexo=="H"?"Hombre":"Mujer";
-			echo "<td>$Dsexo</td>";
-			$arrayDeportes=explode("*",$deportes);
+						echo "<tr>";
+						echo "<td>$id</td>";  
+						echo "<td>$nombre</td>";
+						echo "<td>$nif</td>";
+						$Dsexo=$sexo=="H"?"Hombre":"Mujer";
+						echo "<td>$Dsexo</td>";
+						$arrayDeportes=explode("*",$deportes);
 
-			echo "<td>";
-				foreach ($arrayDeportes as $value) {
-					echo "{$Ddeportes[$value]}<br>";
-				}
-			echo "</td>";
-			echo "<td>$provincia</td>";
-			echo "<td>$so</td>";
-			echo "<td>$comentario</td>";
-		echo "</tr>";
+						echo "<td>";
+						foreach ($arrayDeportes as $value) {
+							echo "{$dDeportes[$value]}<br>";
+						}
+						echo "</td>";
+						echo "<td>$provincia</td>";
 
-	}
+						$arraySO=explode("*",$so);
+						echo "<td>";
+						foreach ($arraySO as $value) {
+							echo "{$dSO[$value]}<br>";
+						}
 
-?>
+						echo "</td>";
+						echo "<td>$comentario</td>";
+						echo "</tr>";
+
+					}
+
+					?>
 
 				</table>
 			</div>
