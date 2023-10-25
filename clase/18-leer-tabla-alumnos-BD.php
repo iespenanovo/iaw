@@ -15,6 +15,7 @@
 
 	$provincia=$_GET["provincia"]??"";
 	$sexo=$_GET["sexo"]??"";
+	$deportes=$_GET['deportes']??array();//si no tenemos parámetro 'deportes[]' crea un array vacío
 
 	$filtro="";
 	if($provincia!="") 	{
@@ -24,9 +25,18 @@
 		$filtro.=" and sexo='$sexo'";
 	}
 
+	//solución de filtro deportes, donde han de cumplirse todos los deportes marcados:
+	foreach ($deportes as $codDeporte) {
+		$filtro.=" and deportes LIKE '%$codDeporte%'";	
+	}
+
+	//solución de filtro deportes, donde vale que se cumpla cualquier deporte marcado:
+	//necesito sentencia SQL como el ste ejemplo:
+	//SELECT * FROM alumnos WHERE 1 and provincia='LU' and sexo='H' and (deportes LIKE '%F%' or deportes LIKE '%B%') ORDER BY provincia,nombre	
+	
 
 	$SQL="SELECT * FROM alumnos WHERE 1 $filtro ORDER BY provincia,nombre";
-	
+
 
 	//echo "<p>$SQL</p>";
 	$resultado=consultaSQL($c,$SQL);
@@ -58,6 +68,14 @@
 					<input id="hombre" type="radio" name="sexo" value="H" <?php echo $sexo=='H'?'checked':'' ?>   >
 					<label class="ms-2" for="mujer"> Mujer </label>
 					<input id="mujer" type="radio" name="sexo" value="M" <?php echo $sexo=='M'?'checked':'' ?>  >
+
+					<label class="ms-3" for="futbol">Futbol </label>
+					<input id="futbol" type="checkbox" name="deportes[]" value="F" <?php echo in_array("F", $deportes)?'checked':'' ?>>
+					<label for="baloncesto"> Baloncesto </label>
+					<input id="baloncesto" type="checkbox" name="deportes[]" value="B" <?php echo in_array("B", $deportes)?'checked':'' ?>>
+					<label for="natacion"> Natación </label>
+					<input id="natacion" type="checkbox" name="deportes[]" value="N" <?php echo in_array("N", $deportes)?'checked':'' ?>>
+
 
 
 					<input class="ms-3 btn btn-secondary" type="submit" value="Filtrar">
