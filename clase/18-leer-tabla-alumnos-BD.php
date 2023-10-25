@@ -26,14 +26,25 @@
 	}
 
 	//solución de filtro deportes, donde han de cumplirse todos los deportes marcados:
-	foreach ($deportes as $codDeporte) {
-		$filtro.=" and deportes LIKE '%$codDeporte%'";	
-	}
+	// foreach ($deportes as $codDeporte) {
+	// 	$filtro.=" and deportes LIKE '%$codDeporte%'";	
+	// }
+
 
 	//solución de filtro deportes, donde vale que se cumpla cualquier deporte marcado:
 	//necesito sentencia SQL como el ste ejemplo:
 	//SELECT * FROM alumnos WHERE 1 and provincia='LU' and sexo='H' and (deportes LIKE '%F%' or deportes LIKE '%B%') ORDER BY provincia,nombre	
-	
+
+	if(count($deportes)>0) {
+		$filtro.=" and (";
+		$or="";
+		foreach ($deportes as $codDeporte) {
+			$filtro.="$or deportes LIKE '%$codDeporte%'";	
+			$or=" or";
+		}
+		$filtro.=")";
+	}
+
 
 	$SQL="SELECT * FROM alumnos WHERE 1 $filtro ORDER BY provincia,nombre";
 
@@ -71,9 +82,9 @@
 
 					<label class="ms-3" for="futbol">Futbol </label>
 					<input id="futbol" type="checkbox" name="deportes[]" value="F" <?php echo in_array("F", $deportes)?'checked':'' ?>>
-					<label for="baloncesto"> Baloncesto </label>
+					<label class="ms-2" for="baloncesto"> Baloncesto </label>
 					<input id="baloncesto" type="checkbox" name="deportes[]" value="B" <?php echo in_array("B", $deportes)?'checked':'' ?>>
-					<label for="natacion"> Natación </label>
+					<label class="ms-2" for="natacion"> Natación </label>
 					<input id="natacion" type="checkbox" name="deportes[]" value="N" <?php echo in_array("N", $deportes)?'checked':'' ?>>
 
 
