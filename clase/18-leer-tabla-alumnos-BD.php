@@ -12,10 +12,22 @@
 	<?php 
 	require "base-datos.php";
 
+
 	$provincia=$_GET["provincia"]??"";
+	$sexo=$_GET["sexo"]??"";
+
+	$filtro="";
+	if($provincia!="") 	{
+		$filtro.=" and provincia='$provincia'";
+	}
+	if($sexo!="") 	{
+		$filtro.=" and sexo='$sexo'";
+	}
 
 
-	$SQL="SELECT * FROM alumnos WHERE provincia='$provincia' ORDER BY provincia,nombre";
+	$SQL="SELECT * FROM alumnos WHERE 1 $filtro ORDER BY provincia,nombre";
+	
+
 	//echo "<p>$SQL</p>";
 	$resultado=consultaSQL($c,$SQL);
 	$numFilas=mysqli_num_rows($resultado);
@@ -42,12 +54,21 @@
 						<option value="PO" <?php echo $provincia=="PO"?"selected":"" ?>>Pontevedra</option>
 					</select>
 
-					<input type="submit" value="Filtrar">
+					<label class="ms-3" for="hombre">Hombre </label>
+					<input id="hombre" type="radio" name="sexo" value="H" <?php echo $sexo=='H'?'checked':'' ?>   >
+					<label class="ms-2" for="mujer"> Mujer </label>
+					<input id="mujer" type="radio" name="sexo" value="M" <?php echo $sexo=='M'?'checked':'' ?>  >
+
+
+					<input class="ms-3 btn btn-secondary" type="submit" value="Filtrar">
+					<a class="ms-3 btn btn-secondary" href="?">Borrar filtro</a>
 
 					
 				</form>
+				<hr>
 			</div>
 		</div>
+		<div><?php echo $SQL ?><hr> </div>
 		<div class="row">
 			<div class="col">
 				<table class="table table-responsive table-striped">
