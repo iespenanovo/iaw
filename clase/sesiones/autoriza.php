@@ -7,7 +7,6 @@ session_start();
 $usuario=$_POST['usuario']??"";
 $clave=$_POST['clave']??"";
 
-
 //definimos las credenciales correctas (lo usual es consultar a la BD)
 // $claveBD=hash('md5', 'Abc123..');
 // echo "<hr>$claveBD<hr>";
