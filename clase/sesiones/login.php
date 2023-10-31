@@ -16,19 +16,26 @@
 		</div>
 		<div class="row mt-5">
 			<div class="offset-3 col-6">
-				<form action="19b-sesiones-autoriza.php" method="POST">
+				<form action="autoriza.php" method="POST">
 					<div class="mb-3">
 						<label for="usuario" class="form-label">Usuario:</label>
 						<input type="text" class="form-control" id="usuario" name="usuario">
 					</div>
 					<div class="mb-3">
 						<label for="clave" class="form-label">Contraseña:</label>
-						<input type="text" class="form-control" id="clave" name="clave">
+						<input type="password" class="form-control" id="clave" name="clave">
 					</div>
 					<div class="mb-3">
 						<input class="btn btn-primary" type="submit" class="form-control" value="Iniciar sesión">
 					</div>
 				</form>
+<?php 
+		        $op=$_GET["op"]??"";
+		        if($op=="error") {
+		            echo "<div class='alert alert-danger' role='alert'>Credenciales incorrectas</div>";
+		        }
+    
+?>   				
 			</div>
 		</div>
 	</div>
