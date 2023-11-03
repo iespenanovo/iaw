@@ -34,12 +34,12 @@ if ($usuario==$usuarioBD) {
     }
 
     if($credenciales) {
-        echo "<p>Credenciales correctas</p>";
+        //echo "<p>Credenciales correctas</p>";
         header("Location:panel-usuario.php");
         exit();
 
     } else {
-        echo "<p class='error'>Credenciales incorrectas. <a href='login.php'>Volver a intentar</a></p>";
+        //echo "<p class='error'>Credenciales incorrectas. <a href='login.php'>Volver a intentar</a></p>";
         header("Location:login.php?op=error");
         exit();
 
