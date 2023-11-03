@@ -162,6 +162,7 @@ $mensajesError="";
 					//de la base de datos
 
 					$clave=hash('md5', $clave);
+					//$clave=@crypt($clave);
 					$cadenaDeportes=implode("*", $deportes);
 					$cadenaSO=implode("*",$so);
 					$SQL="
