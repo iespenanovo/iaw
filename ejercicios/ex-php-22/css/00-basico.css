@@ -1,0 +1,25 @@
+/*usarmos el modelo de caja borderbox para todo*/
+* {box-sizing: border-box;}
+
+.ex_nombre {
+	text-align: center; 
+	border:5px dashed red; 
+	width: 60%; 
+	margin: auto;
+	padding: 10px; 
+	color:blue;
+}
+.ex_ejercicio {
+	margin-top: 5px; 
+	border: 5px solid blue; 
+	color:white; 
+	background-color: blue;
+}
+.ex_imagen {
+margin:0 auto;
+width:40%;
+text-align:center;
+}
+.ex_examen img {
+	width:100%;
+}

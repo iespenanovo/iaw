@@ -1,0 +1,27 @@
+
+
+td {border: 1px solid #000;}
+
+
+.centro {text-align:center;}
+.dcha {text-align:right;}
+
+
+.Coruña {background-color: lightsalmon;}
+.Lugo {background-color: lightgreen;}
+
+table {
+	width: 450px;
+	margin: 0 auto;
+}
+
+#contenedor {
+	width: 90%;
+	margin:0 auto;
+}
+
+
+.gris {background-color: lightgrey};
+
+
+

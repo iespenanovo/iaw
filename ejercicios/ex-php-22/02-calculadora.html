@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Petición de operación</title>
+  <style>
+      * { font-size: 20px;
+          text-align: center;
+        }
+      h3 { color: blue;}
+  </style>
+</head>
+<body>
+
+  <h1>Petición de operación</h1>
+  <h2>(suma, resta, multiplicación o división)</h2>
+  <h3>N1 (operador) N2</h3>
+
+  <form action="02-calculadora.php" method="get">
+
+    <input type="text" name="n1" value=""  size="1" />
+    <select name="op" >
+      <option value="+">&nbsp; + &nbsp;</option>
+      <option value="-">&nbsp; - &nbsp;</option>
+      <option value="*">&nbsp; x &nbsp;</option>
+      <option value="/">&nbsp; / &nbsp;</option>
+    </select>
+    <input type="text" name="n2" value=""  size="1" />
+    <br><br>
+    <input type="submit"  value="Calcular"/>
+  </form> 
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	text-align: center;
+}
+.navegacion {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+.navegacion a{
+	text-decoration: none;
+	color: blue;
+	font-size: 1.5rem;
+	padding: 25px;
+}
+.contenedor {
+	/*border: 1px dotted grey;*/
+	margin: auto;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	grid-template-rows: auto;
+	grid-gap: 20px;
+
+}
+
+.diasmes {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-rows: auto;
+}
+
+.diasmes .cab {
+	font-weight: 800;
+	background-color: #000;
+	color: #fff;
+}
+
+.diasmes div {
+	border: 1px dotted; grey;
+	padding: 5px;
+}
+
+.dia-actual{
+	font-weight: bold;
+	background-color: lightgrey;
+}
+
+.dia-festivo {
+	color: red;
+}
+/*// X-Small devices (portrait phones, less than 576px)*/
+/*// No media query for `xs` since this is the default in Bootstrap*/
+
+/*// Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+	.contenedor {width: 85%;}	
+}
+
+/*// Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+	.contenedor {width: 90%;
+	grid-template-columns: repeat(2, 1fr);
+
+	}	
+}
+
+/*// Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+	.contenedor {width: 85%;
+	grid-template-columns: repeat(3, 1fr);
+
+	}	
+
+}
+
+/*// X-Large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+	.contenedor {width: 80%;
+	grid-template-columns: repeat(3, 1fr);
+
+	}	
+
+}
+
+/*// XX-Large devices (larger desktops, 1400px and up)*/
+@media (min-width: 1400px) {
+	.contenedor {width: 80%;
+	grid-template-columns: repeat(4, 1fr);
+
+	}	
+
+}
